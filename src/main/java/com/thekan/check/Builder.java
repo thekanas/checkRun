@@ -1,5 +1,4 @@
 package com.thekan.check;
 
-public class CheckBuilder {
-
+public interface Builder {
 }

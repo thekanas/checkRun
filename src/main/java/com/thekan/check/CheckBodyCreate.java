@@ -16,7 +16,6 @@ public class CheckBodyCreate {
     public CheckBodyCreate(LoadData loadData){
         this.products = loadData.getProducts();
         this.order = loadData.getOrder();
-
     }
 
     public double getTotalForProducts() {
@@ -34,13 +33,10 @@ public class CheckBodyCreate {
             if(product.length>2 && product[2].equalsIgnoreCase("true") && Integer.parseInt(pair[1])>=Integer.parseInt(product[3])){
                 //то формируем в чеке вторую строчку, где указываем размер скидки и сумму со скидкой
                 String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1])*(100-Integer.parseInt(product[4]))/100);
-                if(i>0) {
-                    body.append("\n");
-                }
                 body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], ""));
                 body.append("\n");
                 body.append(CheckPattern.patternBody("", "discount", product[4]+"%", "" + CheckPattern.currency + totalForProduct));
-
+                body.append("\n");
 
                 totalForProducts += Double.parseDouble(totalForProduct);
                 i++;
@@ -48,11 +44,8 @@ public class CheckBodyCreate {
             }
 
             String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1]));
-            if(i>0) {
-                body.append("\n");
-            }
             body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], CheckPattern.currency + totalForProduct));
-
+            body.append("\n");
 
             totalForProducts += Double.parseDouble(totalForProduct);
             i++;
