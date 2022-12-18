@@ -1,0 +1,6 @@
+Id		PercentageDiscount
+1234	11
+23		12
+34		14
+2a		15
+2b		16

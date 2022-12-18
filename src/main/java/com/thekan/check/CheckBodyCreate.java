@@ -1,10 +1,7 @@
 package com.thekan.check;
 
-
 import com.thekan.LoadData;
 import com.thekan.Products;
-
-
 import java.util.List;
 import java.util.Locale;
 

@@ -60,12 +60,8 @@ public class Check {
         if (separator == null || separator.isEmpty()){
             return "";
         }
-        StringBuilder separators = new StringBuilder();
-        for(int i = 0; i<CheckPattern.widthOfCheckInChar; i++){
-            separators.append(separator);
-        }
 
-        return CheckPattern.patternSeparators(separators.toString()) + CheckPattern.lineBreakCharacter;
+        return CheckPattern.patternSeparators(separator.repeat(CheckPattern.widthOfCheckInChar)) + CheckPattern.lineBreakCharacter;
     }
 
     public String emptyStr(){
@@ -117,15 +113,15 @@ public class Check {
         check.append(separator(separator));
 
         if(vatProcent > 0) {
-            check.append(CheckPattern.patternInfo("TAXABLETOT  ", taxableTotal)).append(CheckPattern.lineBreakCharacter);
+            check.append(CheckPattern.patternInfo("TAXABLE TOT.", taxableTotal)).append(CheckPattern.lineBreakCharacter);
             check.append(CheckPattern.patternInfo("VAT" + vatProcent + "%", vat)).append(CheckPattern.lineBreakCharacter);
         }
 
-        check.append(CheckPattern.patternInfo("TOTAL  ", total)).append(CheckPattern.lineBreakCharacter);
+        check.append(CheckPattern.patternInfo("TOTAL", total)).append(CheckPattern.lineBreakCharacter);
 
         if(isDiscountCardPresent){
             check.append(CheckPattern.patternInfo("Discount Card: " + discountCardNumber + "  " + discountCardDiscount + "%")).append(CheckPattern.lineBreakCharacter);
-            check.append(CheckPattern.patternInfo("Discounted Total: ", discountedTotal)).append(CheckPattern.lineBreakCharacter);
+            check.append(CheckPattern.patternInfo("Discounted Total:", discountedTotal)).append(CheckPattern.lineBreakCharacter);
         }
 
         check.append(separator(separator));

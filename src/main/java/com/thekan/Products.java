@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class Products {
 
-
     private HashMap<String, String[]> products = new HashMap<>();
 
     public HashMap<String, String[]> getProducts() {
@@ -25,17 +24,8 @@ public class Products {
         ArrayList<String> strings = ConsoleHelper.readToFile(patch);
 
         for (int i = 1; i < strings.size(); i++) {
-            String[] str = strings.get(i).split(" ");
-            products.put(str[0], (String[]) Arrays.stream(str).skip(1).toArray());
+            String[] str = strings.get(i).split("\\s+");
+            products.put(str[0], Arrays.stream(str).skip(1).toArray(String[]::new));
         }
-
-
-
-        products.put("1", new String[]{"Banana", "30.99"});
-        products.put("2", new String[]{"milk", "1.99"});
-        products.put("3", new String[]{"Bread", "0.80"});
-        products.put("4", new String[]{"Applegbljhbgljbhljbh", "3.50", "true", "5", "10"});
-        products.put("5", new String[]{"Cheese", "7.10"});
-        products.put("6", new String[]{"Juice", "3.69"});
     }
 }

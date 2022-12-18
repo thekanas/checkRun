@@ -11,7 +11,7 @@ public class CheckPattern {
     public static String patternForSeparators = "|%-36s|";
     public static String lineBreakCharacter = "\r\n";
     public static DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/M/yy");
-    public static DateTimeFormatter time = DateTimeFormatter.ofPattern("hh:mm:ss");
+    public static DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 
     public static  String patternBody(String a, String b, String c, String d) {
@@ -45,9 +45,7 @@ public class CheckPattern {
             return str;
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < pads/2; i++) {
-            sb.append(" ");
-        }
+        sb.append(" ".repeat(pads / 2));
         sb.append(str);
         return sb.toString();
     }
