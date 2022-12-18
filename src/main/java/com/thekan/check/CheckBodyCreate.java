@@ -24,7 +24,7 @@ public class CheckBodyCreate {
         StringBuilder body = new StringBuilder();
 
         for(String[] pair : order){
-            //!добавить проверку наличия индекса в коллекции продуктов
+
             String[] product = products.getProducts().get(pair[0]);
 
             if(product==null || !products.getProducts().containsKey(pair[0]))
