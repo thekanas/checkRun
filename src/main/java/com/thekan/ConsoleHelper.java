@@ -28,9 +28,11 @@ public class ConsoleHelper {
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            ConsoleHelper.print("Неправильный путь/название файла с товарами/дисконтными картами");
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(0);
         }
         return strings;
     }

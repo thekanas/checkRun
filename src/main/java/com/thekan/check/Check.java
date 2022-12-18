@@ -37,7 +37,14 @@ public class Check {
         this.vatProcent = vatProcent;
 
         CheckBodyCreate checkBody = new CheckBodyCreate(loadData);
-        this.body = checkBody.bodyLoad();
+
+        try {
+            this.body = checkBody.bodyLoad();
+        } catch (Exception e) {
+            ConsoleHelper.print(e.getMessage());
+            System.exit(0);
+        }
+
         this.taxableTotal =CheckPattern.currency + checkBody.getTotalForProducts();
         String vat = String.format(Locale.US ,"%.2f", (checkBody.getTotalForProducts()*vatProcent/100));
         this.vat = CheckPattern.currency + vat;
