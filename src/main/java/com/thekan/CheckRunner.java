@@ -11,9 +11,18 @@ public class CheckRunner {
 
 
         LoadData data = new LoadData(argss);
-        //Products products = new Products();
-        //DiscountCards discountCards = new DiscountCards();
-        Check check = new Check("CashCheck", "Pyaterochka","Sovetskaya 163","+375 33 222-33-55", "N124aab", new String[]{"QTY", "DESCRIPTION", "PRICE", "TOTAL"}, "-", 10,data);
+
+        Check check = new CheckBuilder(data)
+                .setTitle("CashCheck")
+                .setStoreName("Pyaterochka")
+                .setStoreAddress("Sovetskaya 163")
+                .setStoreTelephone("+375 33 222-33-55")
+                .setIdCashier("N124aab")
+                .setColumnName(new String[]{"QTY", "DESCRIPTION", "PRICE", "TOTAL"})
+                .setSeparator("-")
+                .setVatProcent(10)
+                .checkBuild();
+
         check.checkPrint();
     }
 }

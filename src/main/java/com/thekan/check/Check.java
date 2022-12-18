@@ -9,10 +9,10 @@ public class Check {
 
     private String title;
     private String storeName;
-    private String storeАddress;
+    private String storeAddress;
     private String storeTelephone;
     private String idCashier;
-    private String columnName;
+    private String[] columnName;
     private String separator;
     private int vatProcent;
 
@@ -25,15 +25,15 @@ public class Check {
     private String discountCardNumber;
     private int discountCardDiscount;
 
-    public Check(String title, String storeName, String storeАddress, String storeTelephone, String idCashier, String[] columnName, String separator, int vatProcent, LoadData loadData) {
+    public Check(String title, String storeName, String storeAddress, String storeTelephone, String idCashier, String[] columnName, String separator, int vatProcent, LoadData loadData) {
 
         this.title = title;
         this.storeName = storeName;
-        this.storeАddress = storeАddress;
+        this.storeAddress = storeAddress;
         this.storeTelephone = storeTelephone;
         this.idCashier =idCashier;
-        this.columnName = columnsLoad(columnName);
-        this.separator = separator(separator);
+        this.columnName = columnName;
+        this.separator = separator;
         this.vatProcent = vatProcent;
 
         CheckBodyCreate checkBody = new CheckBodyCreate(loadData);
@@ -57,11 +57,15 @@ public class Check {
     }
 
     public String separator(String separator){
+        if (separator == null || separator.isEmpty()){
+            return "";
+        }
         StringBuilder separators = new StringBuilder();
         for(int i = 0; i<CheckPattern.widthOfCheckInChar; i++){
             separators.append(separator);
         }
-        return CheckPattern.patternSeparators(separators.toString());
+
+        return CheckPattern.patternSeparators(separators.toString()) +"\n";
     }
 
     public String emptyStr(){
@@ -72,45 +76,50 @@ public class Check {
 
         StringBuilder check = new StringBuilder();
 
-        check.append(separator).append("\n");
+        check.append(separator(separator));
 
-        if (!title.isEmpty())
+        if (title != null && !title.isEmpty())
             check.append(CheckPattern.patternInfoCenter(title)).append("\n");
 
-        if (!storeName.isEmpty())
+        if (storeName != null && !storeName.isEmpty())
             check.append(CheckPattern.patternInfoCenter(storeName)).append("\n");
 
-        if (!storeАddress.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeАddress)).append("\n");
+        if (storeAddress != null && !storeAddress.isEmpty())
+            check.append(CheckPattern.patternInfoCenter(storeAddress)).append("\n");
 
-        if (!storeTelephone.isEmpty())
+        if (storeTelephone != null && !storeTelephone.isEmpty())
             check.append(CheckPattern.patternInfoCenter(storeTelephone)).append("\n");
 
-        check.append(emptyStr()).append("\n");
+        check.append(emptyStr());
 
         LocalDateTime now = LocalDateTime.now();
 
-        if (!idCashier.isEmpty())
-            check.append(CheckPattern.patternInfo("Cashier: " + idCashier, "DATE : " + CheckPattern.date.format(now))).append("\n");
+        String idCashierNumber = "";
+        if (idCashier != null && !idCashier.isEmpty())
+            idCashierNumber = "Cashier: " + idCashier;
+
+        check.append(CheckPattern.patternInfo(idCashierNumber, "DATE : " + CheckPattern.date.format(now))).append("\n");
 
         check.append(CheckPattern.patternInfo(" ","TIME : " + CheckPattern.time.format(now))).append("\n");
 
-        check.append(emptyStr()).append("\n");
+        check.append(emptyStr());
 
-        check.append(separator).append("\n");
+        check.append(separator(separator));
 
-        if (!columnName.isEmpty())
-            check.append(columnName).append("\n");
+        if (columnName.length >= 4)
+            check.append(columnsLoad(columnName)).append("\n");
 
-        check.append(separator).append("\n");
+        check.append(separator(separator));
 
         check.append(body);
 
-        check.append(separator).append("\n");
+        check.append(separator(separator));
+        check.append(separator(separator));
 
-        check.append(CheckPattern.patternInfo("TAXABLETOT  ", taxableTotal)).append("\n");
-
-        check.append(CheckPattern.patternInfo("VAT" + vatProcent, vat)).append("\n");
+        if(vatProcent > 0) {
+            check.append(CheckPattern.patternInfo("TAXABLETOT  ", taxableTotal)).append("\n");
+            check.append(CheckPattern.patternInfo("VAT" + vatProcent + "%", vat)).append("\n");
+        }
 
         check.append(CheckPattern.patternInfo("TOTAL  ", total)).append("\n");
 
@@ -119,7 +128,7 @@ public class Check {
             check.append(CheckPattern.patternInfo("Discounted Total: ", discountedTotal)).append("\n");
         }
 
-        check.append(separator).append("\n");
+        check.append(separator(separator));
 
         ConsoleHelper.print(check.toString());
         return check.toString();

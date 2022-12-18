@@ -32,13 +32,14 @@ public class CheckBodyCreate {
             //если текущий продукт на акции и условие акции выполнено
             if(product.length>2 && product[2].equalsIgnoreCase("true") && Integer.parseInt(pair[1])>=Integer.parseInt(product[3])){
                 //то формируем в чеке вторую строчку, где указываем размер скидки и сумму со скидкой
-                String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1])*(100-Integer.parseInt(product[4]))/100);
-                body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], ""));
+                String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1]));
+                String discountAmount = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1])*Integer.parseInt(product[4])/100);
+                body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], CheckPattern.currency + totalForProduct));
                 body.append("\n");
-                body.append(CheckPattern.patternBody("", "discount", product[4]+"%", "" + CheckPattern.currency + totalForProduct));
+                body.append(CheckPattern.patternBody("", "discount", product[4]+"%", "" + CheckPattern.currency + "-" + discountAmount));
                 body.append("\n");
 
-                totalForProducts += Double.parseDouble(totalForProduct);
+                totalForProducts += Double.parseDouble(totalForProduct) - Double.parseDouble(discountAmount);
                 i++;
                 continue;
             }
