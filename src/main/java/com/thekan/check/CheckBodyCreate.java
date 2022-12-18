@@ -35,9 +35,9 @@ public class CheckBodyCreate {
                 String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1]));
                 String discountAmount = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1])*Integer.parseInt(product[4])/100);
                 body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], CheckPattern.currency + totalForProduct));
-                body.append("\n");
+                body.append(CheckPattern.lineBreakCharacter);
                 body.append(CheckPattern.patternBody("", "discount", product[4]+"%", "" + CheckPattern.currency + "-" + discountAmount));
-                body.append("\n");
+                body.append(CheckPattern.lineBreakCharacter);
 
                 totalForProducts += Double.parseDouble(totalForProduct) - Double.parseDouble(discountAmount);
                 i++;
@@ -46,7 +46,7 @@ public class CheckBodyCreate {
 
             String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1]));
             body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], CheckPattern.currency + totalForProduct));
-            body.append("\n");
+            body.append(CheckPattern.lineBreakCharacter);
 
             totalForProducts += Double.parseDouble(totalForProduct);
             i++;

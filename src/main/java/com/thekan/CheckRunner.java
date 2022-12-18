@@ -23,6 +23,7 @@ public class CheckRunner {
                 .setVatProcent(10)
                 .checkBuild();
 
-        check.checkPrint();
+        ConsoleHelper.writeToFile(check.checkPrint(), "check.txt");
+        //check.checkPrint();
     }
 }

@@ -65,7 +65,7 @@ public class Check {
             separators.append(separator);
         }
 
-        return CheckPattern.patternSeparators(separators.toString()) +"\n";
+        return CheckPattern.patternSeparators(separators.toString()) + CheckPattern.lineBreakCharacter;
     }
 
     public String emptyStr(){
@@ -79,16 +79,16 @@ public class Check {
         check.append(separator(separator));
 
         if (title != null && !title.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(title)).append("\n");
+            check.append(CheckPattern.patternInfoCenter(title)).append(CheckPattern.lineBreakCharacter);
 
         if (storeName != null && !storeName.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeName)).append("\n");
+            check.append(CheckPattern.patternInfoCenter(storeName)).append(CheckPattern.lineBreakCharacter);
 
         if (storeAddress != null && !storeAddress.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeAddress)).append("\n");
+            check.append(CheckPattern.patternInfoCenter(storeAddress)).append(CheckPattern.lineBreakCharacter);
 
         if (storeTelephone != null && !storeTelephone.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeTelephone)).append("\n");
+            check.append(CheckPattern.patternInfoCenter(storeTelephone)).append(CheckPattern.lineBreakCharacter);
 
         check.append(emptyStr());
 
@@ -98,16 +98,16 @@ public class Check {
         if (idCashier != null && !idCashier.isEmpty())
             idCashierNumber = "Cashier: " + idCashier;
 
-        check.append(CheckPattern.patternInfo(idCashierNumber, "DATE : " + CheckPattern.date.format(now))).append("\n");
+        check.append(CheckPattern.patternInfo(idCashierNumber, "DATE : " + CheckPattern.date.format(now))).append(CheckPattern.lineBreakCharacter);
 
-        check.append(CheckPattern.patternInfo(" ","TIME : " + CheckPattern.time.format(now))).append("\n");
+        check.append(CheckPattern.patternInfo(" ","TIME : " + CheckPattern.time.format(now))).append(CheckPattern.lineBreakCharacter);
 
         check.append(emptyStr());
 
         check.append(separator(separator));
 
         if (columnName.length >= 4)
-            check.append(columnsLoad(columnName)).append("\n");
+            check.append(columnsLoad(columnName)).append(CheckPattern.lineBreakCharacter);
 
         check.append(separator(separator));
 
@@ -117,15 +117,15 @@ public class Check {
         check.append(separator(separator));
 
         if(vatProcent > 0) {
-            check.append(CheckPattern.patternInfo("TAXABLETOT  ", taxableTotal)).append("\n");
-            check.append(CheckPattern.patternInfo("VAT" + vatProcent + "%", vat)).append("\n");
+            check.append(CheckPattern.patternInfo("TAXABLETOT  ", taxableTotal)).append(CheckPattern.lineBreakCharacter);
+            check.append(CheckPattern.patternInfo("VAT" + vatProcent + "%", vat)).append(CheckPattern.lineBreakCharacter);
         }
 
-        check.append(CheckPattern.patternInfo("TOTAL  ", total)).append("\n");
+        check.append(CheckPattern.patternInfo("TOTAL  ", total)).append(CheckPattern.lineBreakCharacter);
 
         if(isDiscountCardPresent){
-            check.append(CheckPattern.patternInfo("Discount Card: " + discountCardNumber + "  " + discountCardDiscount + "%")).append("\n");
-            check.append(CheckPattern.patternInfo("Discounted Total: ", discountedTotal)).append("\n");
+            check.append(CheckPattern.patternInfo("Discount Card: " + discountCardNumber + "  " + discountCardDiscount + "%")).append(CheckPattern.lineBreakCharacter);
+            check.append(CheckPattern.patternInfo("Discounted Total: ", discountedTotal)).append(CheckPattern.lineBreakCharacter);
         }
 
         check.append(separator(separator));

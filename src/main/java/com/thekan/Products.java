@@ -1,5 +1,7 @@
 package com.thekan;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Products {
@@ -20,6 +22,15 @@ public class Products {
         products.put("6", new String[]{"Juice", "3.69"});
     }
     public Products(String patch){
+        ArrayList<String> strings = ConsoleHelper.readToFile(patch);
+
+        for (int i = 1; i < strings.size(); i++) {
+            String[] str = strings.get(i).split(" ");
+            products.put(str[0], (String[]) Arrays.stream(str).skip(1).toArray());
+        }
+
+
+
         products.put("1", new String[]{"Banana", "30.99"});
         products.put("2", new String[]{"milk", "1.99"});
         products.put("3", new String[]{"Bread", "0.80"});

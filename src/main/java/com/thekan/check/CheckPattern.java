@@ -9,6 +9,7 @@ public class CheckPattern {
     public static String patternInfoOneColumn = "| %-34s |";
     public static String patternInfoTwoColumn = "| %-18s%16s |";
     public static String patternForSeparators = "|%-36s|";
+    public static String lineBreakCharacter = "\r\n";
     public static DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/M/yy");
     public static DateTimeFormatter time = DateTimeFormatter.ofPattern("hh:mm:ss");
 
