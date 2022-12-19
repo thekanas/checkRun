@@ -9,7 +9,6 @@ public interface Builder {
     Builder setIdCashier(String idCashier);
     Builder setColumnName(String[] columnName);
     Builder setSeparator(String separator);
-    Builder setVatProcent(int vatProcent);
     Check checkBuild();
 
 }

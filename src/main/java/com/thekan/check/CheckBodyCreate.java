@@ -1,15 +1,16 @@
 package com.thekan.check;
 
-import com.thekan.ConsoleHelper;
 import com.thekan.LoadData;
-import com.thekan.Products;
+import com.thekan.entity.Product;
+import com.thekan.entity.Products;
 import java.util.List;
 import java.util.Locale;
 
 public class CheckBodyCreate {
     private Products products;
     private List<String[]> order;
-    private double totalForProducts = 0;
+    private double totalForProducts = 0.0;
+    private double totalForTax = 0.0;
 
     public CheckBodyCreate(LoadData loadData){
         this.products = loadData.getProducts();
@@ -20,37 +21,41 @@ public class CheckBodyCreate {
         return totalForProducts;
     }
 
+    public double getTotalForTax() {
+        return totalForTax;
+    }
+
     public String bodyLoad() throws Exception {
         StringBuilder body = new StringBuilder();
 
-        for(String[] pair : order){
+        for(String[] orderIdAndQty : order){
 
-            String[] product = products.getProducts().get(pair[0]);
+            Product product = products.getProduct(orderIdAndQty[0]);
 
-            if(product==null || !products.getProducts().containsKey(pair[0]))
-                throw new Exception("товара с id " + pair[0] + " нет в базе");
+            if(product==null)
+                throw new Exception("товара с id " + orderIdAndQty[0] + " нет в базе");
 
                 //если текущий продукт на акции и условие акции выполнено
-            if(product.length>2 && product[2].equalsIgnoreCase("true") && Integer.parseInt(pair[1])>=Integer.parseInt(product[3])){
+            if(product.isDiscount() && Integer.parseInt(orderIdAndQty[1])>=product.getQuantityForDiscount()){
                     //то формируем в чеке вторую строчку, где указываем процент скидки и сумму скидки со знаком минус
-                    String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1]));
-                    String discountAmount = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1])*Integer.parseInt(product[4])/100);
-                    body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], CheckPattern.currency + totalForProduct));
+                    String totalForProduct = String.format(Locale.US ,"%.2f", product.getPrice() * Double.parseDouble(orderIdAndQty[1]));
+                    String discountAmount = String.format(Locale.US ,"%.2f", product.getPrice() * Double.parseDouble(orderIdAndQty[1]) * product.getProcentDiscount()/100);
+                    body.append(CheckPattern.patternBody(orderIdAndQty[1], product.getName(), CheckPattern.currency + product.getPrice(), CheckPattern.currency + totalForProduct));
                     body.append(CheckPattern.lineBreakCharacter);
-                    body.append(CheckPattern.patternBody("", "discount", product[4]+"%", "" + CheckPattern.currency + "-" + discountAmount));
+                    body.append(CheckPattern.patternBody("", "discount", product.getProcentDiscount() + "%", "" + CheckPattern.currency + "-" + discountAmount));
                     body.append(CheckPattern.lineBreakCharacter);
 
                     totalForProducts += Double.parseDouble(totalForProduct) - Double.parseDouble(discountAmount);
-
+                    totalForTax += Double.parseDouble(String.format(Locale.US ,"%.2f", product.getTax() * Double.parseDouble(orderIdAndQty[1])));
                     continue;
             }
 
-            String totalForProduct = String.format(Locale.US ,"%.2f", Double.parseDouble(product[1])*Double.parseDouble(pair[1]));
-            body.append(CheckPattern.patternBody(pair[1], product[0], CheckPattern.currency + product[1], CheckPattern.currency + totalForProduct));
+            String totalForProduct = String.format(Locale.US ,"%.2f", product.getPrice() * Double.parseDouble(orderIdAndQty[1]));
+            body.append(CheckPattern.patternBody(orderIdAndQty[1], product.getName(), CheckPattern.currency + product.getPrice(), CheckPattern.currency + totalForProduct));
             body.append(CheckPattern.lineBreakCharacter);
 
             totalForProducts += Double.parseDouble(totalForProduct);
-
+            totalForTax += Double.parseDouble(String.format(Locale.US ,"%.2f", product.getTax() * Double.parseDouble(orderIdAndQty[1])));
         }
 
         return body.toString();

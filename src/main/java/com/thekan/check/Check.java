@@ -14,7 +14,6 @@ public class Check {
     private String idCashier;
     private String[] columnName;
     private String separator;
-    private int vatProcent;
 
     private String body;
     private String taxableTotal;
@@ -25,7 +24,7 @@ public class Check {
     private String discountCardNumber;
     private int discountCardDiscount;
 
-    public Check(String title, String storeName, String storeAddress, String storeTelephone, String idCashier, String[] columnName, String separator, int vatProcent, LoadData loadData) {
+    public Check(String title, String storeName, String storeAddress, String storeTelephone, String idCashier, String[] columnName, String separator, LoadData loadData) {
 
         this.title = title;
         this.storeName = storeName;
@@ -34,7 +33,6 @@ public class Check {
         this.idCashier =idCashier;
         this.columnName = columnName;
         this.separator = separator;
-        this.vatProcent = vatProcent;
 
         CheckBodyCreate checkBody = new CheckBodyCreate(loadData);
 
@@ -46,14 +44,21 @@ public class Check {
         }
 
         this.taxableTotal =CheckPattern.currency + checkBody.getTotalForProducts();
-        String vat = String.format(Locale.US ,"%.2f", (checkBody.getTotalForProducts()*vatProcent/100));
+        String vat = String.format(Locale.US ,"%.2f", (checkBody.getTotalForTax()));
         this.vat = CheckPattern.currency + vat;
         String total = String.format(Locale.US ,"%.2f", (checkBody.getTotalForProducts() + Double.parseDouble(vat)));
         this.total = CheckPattern.currency + total;
         this.isDiscountCardPresent = loadData.isDiscountCardPresent();
-        this.discountCardNumber = loadData.getDiscountCardNumber();
+
         if(loadData.isDiscountCardPresent()) {
-            discountCardDiscount = loadData.getDiscountCards().getDiscountCards().get(loadData.getDiscountCardNumber());
+            try {
+                this.discountCardNumber = loadData.getDiscountCards().getDiscountCard(loadData.getDiscountCardNumber()).getId();
+            } catch (Exception e) {
+                ConsoleHelper.print("карты с id " + loadData.getDiscountCardNumber() + " нет в базе");
+                ConsoleHelper.print(e.getMessage());
+                System.exit(0);
+            }
+            discountCardDiscount = loadData.getDiscountCards().getDiscountCard(discountCardNumber).getProcentDiscount();
             discountedTotal = String.format(Locale.US ,CheckPattern.currency + "%.2f", (Double.parseDouble(total)*(100-discountCardDiscount)/100));
         }
     }
@@ -75,23 +80,37 @@ public class Check {
         return separator(" ");
     }
 
-    public String checkPrint(){
+    public boolean isNotNullOrEmpty(String s){
+        if (s != null && !s.isEmpty())
+            return true;
+        return false;
+    }
 
+    public String printLineCenter(String s){
+        if (isNotNullOrEmpty(s))
+            return CheckPattern.patternInfoCenter(s) + CheckPattern.lineBreakCharacter;
+        return "";
+    }
+
+    public String printLine(String s){
+        if (isNotNullOrEmpty(s))
+            return CheckPattern.patternInfo(s) + CheckPattern.lineBreakCharacter;
+        return "";
+    }
+
+    public String printLineTwoColums(String s1, String s2){
+        return CheckPattern.patternInfo(s1, s2) + CheckPattern.lineBreakCharacter;
+
+    }
+
+    public String checkPrint() {
         StringBuilder check = new StringBuilder();
 
         check.append(separator(separator));
-
-        if (title != null && !title.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(title)).append(CheckPattern.lineBreakCharacter);
-
-        if (storeName != null && !storeName.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeName)).append(CheckPattern.lineBreakCharacter);
-
-        if (storeAddress != null && !storeAddress.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeAddress)).append(CheckPattern.lineBreakCharacter);
-
-        if (storeTelephone != null && !storeTelephone.isEmpty())
-            check.append(CheckPattern.patternInfoCenter(storeTelephone)).append(CheckPattern.lineBreakCharacter);
+        check.append(printLineCenter(title));
+        check.append(printLineCenter(storeName));
+        check.append(printLineCenter(storeAddress));
+        check.append(printLineCenter(storeTelephone));
 
         check.append(emptyStr());
 
@@ -101,15 +120,13 @@ public class Check {
         if (idCashier != null && !idCashier.isEmpty())
             idCashierNumber = "Cashier: " + idCashier;
 
-        check.append(CheckPattern.patternInfo(idCashierNumber, "DATE : " + CheckPattern.date.format(now))).append(CheckPattern.lineBreakCharacter);
-
-        check.append(CheckPattern.patternInfo(" ","TIME : " + CheckPattern.time.format(now))).append(CheckPattern.lineBreakCharacter);
+        check.append(printLineTwoColums(idCashierNumber, "DATE : " + CheckPattern.date.format(now)));
+        check.append(printLineTwoColums(" ", "TIME : " + CheckPattern.time.format(now)));
 
         check.append(emptyStr());
-
         check.append(separator(separator));
 
-        if (columnName.length >= 4)
+        if (columnName!=null && columnName.length >= 4)
             check.append(columnsLoad(columnName)).append(CheckPattern.lineBreakCharacter);
 
         check.append(separator(separator));
@@ -119,16 +136,13 @@ public class Check {
         check.append(separator(separator));
         check.append(separator(separator));
 
-        if(vatProcent > 0) {
-            check.append(CheckPattern.patternInfo("TAXABLE TOT.", taxableTotal)).append(CheckPattern.lineBreakCharacter);
-            check.append(CheckPattern.patternInfo("VAT" + vatProcent + "%", vat)).append(CheckPattern.lineBreakCharacter);
-        }
+        check.append(printLineTwoColums("TAXABLE TOT.", taxableTotal));
+        check.append(printLineTwoColums("VAT", vat));
+        check.append(printLineTwoColums("TOTAL", total));
 
-        check.append(CheckPattern.patternInfo("TOTAL", total)).append(CheckPattern.lineBreakCharacter);
-
-        if(isDiscountCardPresent){
-            check.append(CheckPattern.patternInfo("Discount Card: " + discountCardNumber + "  " + discountCardDiscount + "%")).append(CheckPattern.lineBreakCharacter);
-            check.append(CheckPattern.patternInfo("Discounted Total:", discountedTotal)).append(CheckPattern.lineBreakCharacter);
+        if (isDiscountCardPresent) {
+            check.append(printLine("Discount Card: " + discountCardNumber + "  " + discountCardDiscount + "%"));
+            check.append(printLineTwoColums("Discounted Total:", discountedTotal));
         }
 
         check.append(separator(separator));
@@ -136,4 +150,5 @@ public class Check {
         ConsoleHelper.print(check.toString());
         return check.toString();
     }
+
 }

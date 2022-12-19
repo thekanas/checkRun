@@ -59,13 +59,7 @@ public class CheckBuilder implements Builder {
         return this;
     }
 
-    @Override
-    public Builder setVatProcent(int vatProcent) {
-        this.vatProcent = vatProcent;
-        return this;
-    }
-
     public Check checkBuild() {
-        return new Check(title, storeName, storeAddress, storeTelephone, idCashier, columnName, separator, vatProcent, loadData);
+        return new Check(title, storeName, storeAddress, storeTelephone, idCashier, columnName, separator, loadData);
     }
 }

@@ -1,5 +1,8 @@
 package com.thekan;
 
+import com.thekan.entity.DiscountCards;
+import com.thekan.entity.Products;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +15,13 @@ public class LoadData {
     private List<String[]> order = new ArrayList<>();
     private String discountCardNumber;
 
-
+    public LoadData(Products products, DiscountCards discountCards, boolean isDiscountCardPresent, List<String[]> order, String discountCardNumber) {
+        this.products = products;
+        this.discountCards = discountCards;
+        this.isDiscountCardPresent = isDiscountCardPresent;
+        this.order = order;
+        this.discountCardNumber = discountCardNumber;
+    }
 
     public LoadData(String[] args){
         //принимаем что путь к файлу с товарами указывается в исходных данных всегда.
