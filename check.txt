@@ -4,23 +4,24 @@
 |            Sovetskaya 163          |
 |          +375 33 222-33-55         |
 |                                    |
-| Cashier: N124aab   DATE : 20/12/22 |
-|                    TIME : 01:25:10 |
+| Cashier: N124aab   DATE : 21/12/22 |
+|                    TIME : 01:17:25 |
 |                                    |
 |------------------------------------|
 | QTY  DESCRIPTION   PRICE     TOTAL |
 |------------------------------------|
 | 1    Banana        $30.99   $30.99 |
-| 2.4  milk          $1.99     $4.78 |
+| 2.4  Milk          $1.99     $4.78 |
 | 3    Bread         $0.8      $2.40 |
-| 6    Applegbljhbgl $3.5     $21.00 |
+| 6    AppleFromPola $3.5     $21.00 |
+|      discount      10%      $-2.10 |
 | 2    Cheese        $7.1     $14.20 |
 | 3    Juice         $3.69    $11.07 |
 |------------------------------------|
 |------------------------------------|
-| TAXABLE TOT.                $84.44 |
-| VAT                          $7.32 |
-| TOTAL                       $91.76 |
+| TAXABLE TOT.                $82.34 |
+| VAT                          $7.11 |
+| TOTAL                       $89.45 |
 | Discount Card: 2a  15%             |
-| Discounted Total:           $78.00 |
+| Discounted Total:           $76.03 |
 |------------------------------------|

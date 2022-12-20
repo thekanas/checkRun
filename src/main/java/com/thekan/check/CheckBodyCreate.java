@@ -49,7 +49,7 @@ public class CheckBodyCreate {
                     body.append(CheckPattern.lineBreakCharacter);
 
                     totalForProducts += Double.parseDouble(totalForProduct) - Double.parseDouble(discountAmount);
-                    totalForTax += Double.parseDouble(String.format(Locale.US ,"%.2f", product.getTax() * Double.parseDouble(orderIdAndQty[1])));
+                    totalForTax += Double.parseDouble(String.format(Locale.US ,"%.2f", product.getTax() * Double.parseDouble(orderIdAndQty[1]) * (100 - product.getProcentDiscount())/100));
                     continue;
             }
 

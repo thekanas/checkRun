@@ -4,11 +4,7 @@ public abstract class AbstractCard {
     private String id;
     private int procentDiscount;
 
-    public String getId() {
-        return id;
-    }
+    public abstract String getId();
 
-    public int getProcentDiscount() {
-        return procentDiscount;
-    }
+    public abstract int getProcentDiscount();
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LoadData {
     //класс разделяет входящие данные на
-    //список покупок, дисконтную карту, пути к файлам с товароми и диск.картами
+    //список покупок, дисконтную карту, пути к файлам с товароми и с диск.картами
     private Products products;
     private DiscountCards discountCards;
     private boolean isDiscountCardPresent;

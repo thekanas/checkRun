@@ -6,19 +6,11 @@ public abstract class AbstractProduct {
     private double price;
     private double tax;
 
-    public String getId() {
-        return id;
-    }
+    public abstract String getId();
 
-    public String getName() {
-        return name;
-    }
+    public abstract String getName();
 
-    public double getPrice() {
-        return price;
-    }
+    public abstract double getPrice();
 
-    public double getTax() {
-        return tax;
-    }
+    public abstract double getTax();
 }

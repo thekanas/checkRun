@@ -1,7 +1,7 @@
 Id	Description		Price	VAT	Discount 	QuantityOfProductsForDiscount 	PercentageDiscounts
 1	Banana			30.99	3.10
-2	milk			1.99	0.19
+2	Milk			1.99	0.19
 3	Bread			0.80	0.08
-4	Applegbljhbgljbhljbh	3.50 	0.35	true 		5 				10
+4	AppleFromPoland		3.50 	0.35	true 		5 				10
 5	Cheese			7.10	0.71
 6	Juice			3.69	0.00

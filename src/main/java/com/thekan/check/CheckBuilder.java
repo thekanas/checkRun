@@ -10,7 +10,6 @@ public class CheckBuilder implements Builder {
     private String idCashier;
     private String[] columnName;
     private String separator;
-    private int vatProcent;
     private LoadData loadData;
 
     public CheckBuilder(LoadData loadData) {

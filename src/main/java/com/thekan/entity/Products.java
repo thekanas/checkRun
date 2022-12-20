@@ -19,7 +19,7 @@ public class Products {
         for (int i = 1; i < strings.size(); i++) {
             String[] str = strings.get(i).split("\\s+");
             if(str.length > 4 && str[4].equalsIgnoreCase("true")){
-                products.add(new Product(str[0], str[1], Double.parseDouble(str[2]), Double.parseDouble(str[3]), Boolean.getBoolean(str[4]), Double.parseDouble(str[5]), Integer.parseInt(str[6])));
+                products.add(new Product(str[0], str[1], Double.parseDouble(str[2]), Double.parseDouble(str[3]), Boolean.parseBoolean(str[4]), Double.parseDouble(str[5]), Integer.parseInt(str[6])));
             }
             else {
                 products.add(new Product(str[0], str[1], Double.parseDouble(str[2]), Double.parseDouble(str[3])));
