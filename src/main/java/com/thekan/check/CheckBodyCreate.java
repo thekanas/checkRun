@@ -6,6 +6,9 @@ import com.thekan.entity.Products;
 import java.util.List;
 import java.util.Locale;
 
+//данный класс формирует тело чека с названием товаров, их количеством, стоимостью за единицу и общей стоимостью
+//также считает общую стоимость товаров до добавления VAT и сумму VAT налога
+
 public class CheckBodyCreate {
     private Products products;
     private List<String[]> order;
@@ -42,7 +45,7 @@ public class CheckBodyCreate {
                     String discountAmount = String.format(Locale.US ,"%.2f", product.getPrice() * Double.parseDouble(orderIdAndQty[1]) * product.getProcentDiscount()/100);
                     body.append(CheckPattern.patternBody(orderIdAndQty[1], product.getName(), CheckPattern.currency + product.getPrice(), CheckPattern.currency + totalForProduct));
                     body.append(CheckPattern.lineBreakCharacter);
-                    body.append(CheckPattern.patternBody("", "discount", product.getProcentDiscount() + "%", "" + CheckPattern.currency + "-" + discountAmount));
+                    body.append(CheckPattern.patternBody("", "discount", product.getProcentDiscount() + "%", CheckPattern.currency + "-" + discountAmount));
                     body.append(CheckPattern.lineBreakCharacter);
 
                     totalForProducts += Double.parseDouble(totalForProduct) - Double.parseDouble(discountAmount);
