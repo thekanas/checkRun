@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.thekan.check.CheckTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-12-21T20:25:10" hostname="ANDREYPK" time="0.066">
+  <properties/>
+  <testcase name="printLine()" classname="com.thekan.check.CheckTest" time="0.004"/>
+  <testcase name="printLineCenter()" classname="com.thekan.check.CheckTest" time="0.002"/>
+  <testcase name="columnsLoad()" classname="com.thekan.check.CheckTest" time="0.002"/>
+  <testcase name="checkPrint()" classname="com.thekan.check.CheckTest" time="0.044"/>
+  <testcase name="printLineTwoColums()" classname="com.thekan.check.CheckTest" time="0.002"/>
+  <testcase name="isNotNullOrEmpty()" classname="com.thekan.check.CheckTest" time="0.002"/>
+  <testcase name="emptyStr()" classname="com.thekan.check.CheckTest" time="0.002"/>
+  <testcase name="separator()" classname="com.thekan.check.CheckTest" time="0.001"/>
+  <system-out><![CDATA[****************************************
+                 title                  
+               storeName                
+              storeAddress              
+             storeTelephone             
+                                        
+Cashier: idCashier       DATE : 21/12/22
+                         TIME : 23:25:10
+                                        
+****************************************
+1         2         3                  4
+****************************************
+2         Banana    $2.0           $4.00
+          discount  10%           $-0.40
+2         Bread     $3.0           $6.00
+****************************************
+****************************************
+TAXABLE TOT.                        $9.6
+VAT                                $0.29
+TOTAL                              $9.89
+Discount Card: 13a  16%                 
+Discounted Total:                  $8.31
+****************************************
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

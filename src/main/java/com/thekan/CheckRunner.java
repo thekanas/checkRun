@@ -18,6 +18,6 @@ public class CheckRunner {
                 .setSeparator("-")
                 .checkBuild();
 
-        ConsoleHelper.writeToFile(check.checkPrint(), "check.txt");
+        ConsoleHelper.writeToFile(check.checkPrint(), CheckPattern.patch);
     }
 }

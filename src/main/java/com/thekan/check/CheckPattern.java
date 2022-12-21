@@ -3,6 +3,8 @@ package com.thekan.check;
 import java.time.format.DateTimeFormatter;
 
 public class CheckPattern {
+    //путь для сохранения файла с чеком
+    public static String patch = "check.txt";
     //ширина чека в символах
     public static int widthOfCheckInChar = 36; 
     public static String currency = "$";

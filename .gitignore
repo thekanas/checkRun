@@ -1,6 +1,5 @@
 .idea
 .gradle
-build
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache

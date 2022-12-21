@@ -1,5 +1,6 @@
 package com.thekan.check;
 
+import com.thekan.ConsoleHelper;
 import com.thekan.LoadData;
 import com.thekan.entity.Product;
 import com.thekan.entity.Products;
@@ -33,12 +34,17 @@ public class CheckBodyCreate {
 
         for(String[] orderIdAndQty : order){
 
-            Product product = products.getProduct(orderIdAndQty[0]);
+            Product product = null;
+            try {
+                product = products.getProduct(orderIdAndQty[0]);
+            } catch (Exception e) {
+                ConsoleHelper.print("товара с id " + orderIdAndQty[0] + " нет в базе");
+                ConsoleHelper.print(e.getMessage());
+                ConsoleHelper.writeToFile("товара с id " + orderIdAndQty[0] + " нет в базе" + CheckPattern.lineBreakCharacter + e.getMessage(), CheckPattern.patch);
+                System.exit(0);
+            }
 
-            if(product==null)
-                throw new Exception("товара с id " + orderIdAndQty[0] + " нет в базе");
-
-                //если текущий продукт на акции и условие акции выполнено
+            //если текущий продукт на акции и условие акции выполнено
             if(product.isDiscount() && Integer.parseInt(orderIdAndQty[1])>=product.getQuantityForDiscount()){
                     //то формируем в чеке вторую строчку, где указываем процент скидки и сумму скидки со знаком минус
                     String totalForProduct = String.format(Locale.US ,"%.2f", product.getPrice() * Double.parseDouble(orderIdAndQty[1]));

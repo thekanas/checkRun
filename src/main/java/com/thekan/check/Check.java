@@ -40,6 +40,7 @@ public class Check {
             this.body = checkBody.bodyLoad();
         } catch (Exception e) {
             ConsoleHelper.print(e.getMessage());
+            ConsoleHelper.writeToFile(e.getMessage(), CheckPattern.patch);
             System.exit(0);
         }
 
@@ -56,6 +57,7 @@ public class Check {
             } catch (Exception e) {
                 ConsoleHelper.print("карты с id " + loadData.getDiscountCardNumber() + " нет в базе");
                 ConsoleHelper.print(e.getMessage());
+                ConsoleHelper.writeToFile("карты с id " + loadData.getDiscountCardNumber() + " нет в базе" + CheckPattern.lineBreakCharacter + e.getMessage(), CheckPattern.patch);
                 System.exit(0);
             }
             discountCardDiscount = loadData.getDiscountCards().getDiscountCard(discountCardNumber).getProcentDiscount();

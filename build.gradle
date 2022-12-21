@@ -1,7 +1,17 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
+jar {
+	baseName = 'checkrun'
+    version =  '0.1.0'
+    manifest {
+        attributes(
+                'Main-Class': 'com.thekan.CheckRunner'
+        )
+    }
+}
 group 'org.example'
 version '1.0-SNAPSHOT'
 

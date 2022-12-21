@@ -1,5 +1,6 @@
 package com.thekan;
 
+import com.thekan.check.CheckPattern;
 import com.thekan.entity.DiscountCards;
 import com.thekan.entity.Products;
 
@@ -35,18 +36,34 @@ public class LoadData {
         if ((args[args.length-2]).toLowerCase().endsWith(".txt")) {
             products = new Products(args[args.length-2]);
 
-            if((args[args.length-3]).toLowerCase().startsWith("card-")) {
+            if((args[args.length-3]).toLowerCase().startsWith("card-") && !(args[args.length-3]).equalsIgnoreCase("card-")) {
                 isDiscountCardPresent = true;
                 discountCardNumber = (args[args.length - 3]).substring(5);
-                discountCards = new DiscountCards(args[args.length-1]);
+                if ((args[args.length-1]).toLowerCase().endsWith(".txt")) {
+                    discountCards = new DiscountCards(args[args.length-1]);
+                } else {
+                    ConsoleHelper.print("не указан файл с дисконтными картами");
+                    ConsoleHelper.writeToFile("не указан файл с дисконтными картами", CheckPattern.patch);
+                    System.exit(0);
+                }
+            }
+            else {
+                ConsoleHelper.print("не указан номер дисконтной карты");
+                ConsoleHelper.writeToFile("не указан номер дисконтной карты", CheckPattern.patch);
+                System.exit(0);
             }
 
             orderLoad(args, args.length-3);
         }
-        else {
+        else if((args[args.length-1]).toLowerCase().endsWith(".txt")) {
             products = new Products(args[args.length-1]);
             isDiscountCardPresent = false;
             orderLoad(args, args.length-1);
+        }
+        else {
+            ConsoleHelper.print("не указан файл с товарами");
+            ConsoleHelper.writeToFile("не указан файл с товарами", CheckPattern.patch);
+            System.exit(0);
         }
 
     }
