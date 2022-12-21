@@ -3,13 +3,21 @@ package com.thekan.check;
 import java.time.format.DateTimeFormatter;
 
 public class CheckPattern {
-    public static int widthOfCheckInChar = 36;
+    //ширина чека в символах
+    public static int widthOfCheckInChar = 36; 
     public static String currency = "$";
-    public static String patternBody = "| %-5s%-14.13s%-7s%8s |";
+    //шаблон для тела чека с товарами, колличесво символов(s и дополнительные пробелы, не включая начальные символы границы чека если они есть) 
+    //должно соответствовать widthOfCheckInChar
+    public static String patternBody = "| %-5s%-14.13s%-7s%8s |"; //шаблон для тела чека с товарами, 
+    //шаблон для надписей на чеке в одну колонку
     public static String patternInfoOneColumn = "| %-34s |";
+    //шаблон для надписей на чеке в две колонки
     public static String patternInfoTwoColumn = "| %-18s%16s |";
+    //шаблон для строки-разделителя
     public static String patternForSeparators = "|%-36s|";
+    //шаблон переноса строки
     public static String lineBreakCharacter = "\r\n";
+    //формат времени и даты
     public static DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/M/yy");
     public static DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
