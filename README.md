@@ -9,7 +9,7 @@ Gradle 7.5
 ## Инструкция по запуску
 Для запуска приложения необходимо запускать CheckRunner.java со следующими параметрами:
 ```sh
-  1-2 2-3 3-4 card-1111 products.txt discountCards.txt
+  1-2 2-3 3-4 card-1234 products.txt discountCards.txt
 ```
 где
 * 1-2, 2-3, 3-4 - id товаров и их колличество, 
