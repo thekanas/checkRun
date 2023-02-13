@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductsTest {
     Product product = new Product("1a", "Banana", 1.99, 0.05, true, 1.5, 10);
-    List<Product> list = new ArrayList<>();
+    ArrayList<Product> list = new ArrayList<>();
     Products products = new Products(list);
 
     @BeforeEach

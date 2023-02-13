@@ -60,7 +60,8 @@ public class CheckBodyCreate {
             }
 
             String totalForProduct = String.format(Locale.US ,"%.2f", product.getPrice() * Double.parseDouble(orderIdAndQty[1]));
-            body.append(CheckPattern.patternBody(orderIdAndQty[1], product.getName(), CheckPattern.currency + product.getPrice(), CheckPattern.currency + totalForProduct));
+            String price = String.format(Locale.US ,"%.2f", product.getPrice());
+            body.append(CheckPattern.patternBody(orderIdAndQty[1], product.getName(), CheckPattern.currency + price, CheckPattern.currency + totalForProduct));
             body.append(CheckPattern.lineBreakCharacter);
 
             totalForProducts += Double.parseDouble(totalForProduct);

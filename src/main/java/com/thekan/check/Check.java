@@ -44,7 +44,7 @@ public class Check {
             System.exit(0);
         }
 
-        this.taxableTotal =CheckPattern.currency + checkBody.getTotalForProducts();
+        this.taxableTotal =CheckPattern.currency + String.format(Locale.US ,"%.2f", (checkBody.getTotalForProducts()));
         String vat = String.format(Locale.US ,"%.2f", (checkBody.getTotalForTax()));
         this.vat = CheckPattern.currency + vat;
         String total = String.format(Locale.US ,"%.2f", (checkBody.getTotalForProducts() + Double.parseDouble(vat)));
@@ -52,15 +52,8 @@ public class Check {
         this.isDiscountCardPresent = loadData.isDiscountCardPresent();
 
         if(loadData.isDiscountCardPresent()) {
-            try {
-                this.discountCardNumber = loadData.getDiscountCards().getDiscountCard(loadData.getDiscountCardNumber()).getId();
-            } catch (Exception e) {
-                ConsoleHelper.print("карты с id " + loadData.getDiscountCardNumber() + " нет в базе");
-                ConsoleHelper.print(e.getMessage());
-                ConsoleHelper.writeToFile("карты с id " + loadData.getDiscountCardNumber() + " нет в базе" + CheckPattern.lineBreakCharacter + e.getMessage(), CheckPattern.patch);
-                System.exit(0);
-            }
-            discountCardDiscount = loadData.getDiscountCards().getDiscountCard(discountCardNumber).getProcentDiscount();
+            discountCardNumber = loadData.getDiscountCard().getId();
+            discountCardDiscount = loadData.getDiscountCard().getProcentDiscount();
             discountedTotal = String.format(Locale.US ,CheckPattern.currency + "%.2f", (Double.parseDouble(total)*(100-discountCardDiscount)/100));
         }
     }

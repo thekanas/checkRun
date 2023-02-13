@@ -18,7 +18,7 @@ class CheckTest {
 
     Product product1 = new Product("1a", "Banana", 2.00, 0.05, true, 1.5, 10);
     Product product2 = new Product("2a", "Bread", 3.00, 0.10);
-    List<Product> listProduct = new ArrayList<>();
+    ArrayList<Product> listProduct = new ArrayList<>();
 
     Products products;
 
@@ -51,7 +51,7 @@ class CheckTest {
         listDiscountCard.add(discountCard);
         discountCards = new DiscountCards(listDiscountCard);
 
-        loadData = new LoadData(products, discountCards, true, order, "13a");
+        loadData = new LoadData(products, discountCard, true, order, "13a");
 
         check = new Check("title", "storeName", "storeAddress", "storeTelephone", "idCashier", new String[]{"1","2","3","4"},"*",loadData);
 

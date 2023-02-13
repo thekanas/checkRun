@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.thekan.entity.ProductTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-12-21T20:25:10" hostname="ANDREYPK" time="0.008">
+<testsuite name="com.thekan.entity.ProductTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-12-21T21:01:24" hostname="ANDREYPK" time="0.012">
   <properties/>
   <testcase name="getTax()" classname="com.thekan.entity.ProductTest" time="0.001"/>
   <testcase name="isDiscount()" classname="com.thekan.entity.ProductTest" time="0.001"/>
-  <testcase name="getName()" classname="com.thekan.entity.ProductTest" time="0.001"/>
-  <testcase name="getId()" classname="com.thekan.entity.ProductTest" time="0.001"/>
-  <testcase name="getProcentDiscount()" classname="com.thekan.entity.ProductTest" time="0.0"/>
-  <testcase name="getQuantityForDiscount()" classname="com.thekan.entity.ProductTest" time="0.0"/>
-  <testcase name="getPrice()" classname="com.thekan.entity.ProductTest" time="0.0"/>
+  <testcase name="getName()" classname="com.thekan.entity.ProductTest" time="0.0"/>
+  <testcase name="getId()" classname="com.thekan.entity.ProductTest" time="0.0"/>
+  <testcase name="getProcentDiscount()" classname="com.thekan.entity.ProductTest" time="0.002"/>
+  <testcase name="getQuantityForDiscount()" classname="com.thekan.entity.ProductTest" time="0.001"/>
+  <testcase name="getPrice()" classname="com.thekan.entity.ProductTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

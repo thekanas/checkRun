@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoadDataTest {
     
     Product product = new Product("1a", "Banana", 1.99, 0.05, true, 1.5, 10);
-    List<Product> listProduct = new ArrayList<>();
+    ArrayList<Product> listProduct = new ArrayList<>();
 
     Products products = new Products(listProduct);
     
     DiscountCard discountCard = new DiscountCard("13a", 16);
     List<DiscountCard> listDiscountCard = new ArrayList<>();
 
-    DiscountCards discountCards = new DiscountCards(listDiscountCard);
+    //DiscountCards discountCards = new DiscountCards(listDiscountCard);
     
     List<String[]> order = new ArrayList<>();
 
@@ -35,7 +35,7 @@ class LoadDataTest {
         listProduct.add(product);
         listDiscountCard.add(discountCard);
         order.add(new String[]{"1a", "5"});
-        loadData = new LoadData(products, discountCards, true, order, "13a");
+        loadData = new LoadData(products, discountCard, true, order, "13a");
     }
 
 
@@ -61,7 +61,7 @@ class LoadDataTest {
 
     @Test
     void getDiscountCards() {
-        assertEquals (discountCards, loadData.getDiscountCards());
+        assertEquals (discountCard, loadData.getDiscountCard());
     }
 
     @Test

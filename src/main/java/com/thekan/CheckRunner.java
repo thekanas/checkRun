@@ -3,10 +3,11 @@ import com.thekan.check.*;
 
 public class CheckRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
 
-        LoadData data = new LoadData(args);
+        String[] args1 = new String[]{"1-2", "3-1", "4-6", "5-8", "card-3"};
+        LoadData data = new LoadData(args1);
 
         Check check = new CheckBuilder(data)
                 .setTitle("CashCheck")

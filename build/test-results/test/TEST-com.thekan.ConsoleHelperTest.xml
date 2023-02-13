@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.thekan.ConsoleHelperTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-21T20:25:10" hostname="ANDREYPK" time="0.021">
+<testsuite name="com.thekan.ConsoleHelperTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-21T21:01:24" hostname="ANDREYPK" time="0.052">
   <properties/>
-  <testcase name="print()" classname="com.thekan.ConsoleHelperTest" time="0.021"/>
+  <testcase name="print()" classname="com.thekan.ConsoleHelperTest" time="0.052"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

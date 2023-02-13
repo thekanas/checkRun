@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.thekan.entity.DiscountCardsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-12-21T20:25:10" hostname="ANDREYPK" time="0.003">
+<testsuite name="com.thekan.entity.DiscountCardsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-12-21T21:01:24" hostname="ANDREYPK" time="0.004">
   <properties/>
   <testcase name="getDiscountCard1()" classname="com.thekan.entity.DiscountCardsTest" time="0.001"/>
   <testcase name="getDiscountCard2()" classname="com.thekan.entity.DiscountCardsTest" time="0.002"/>
