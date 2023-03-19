@@ -24,6 +24,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.32'
+    testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.36', ext: 'pom'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
 }
 
 test {

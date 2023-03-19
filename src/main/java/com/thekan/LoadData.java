@@ -32,6 +32,7 @@ public class LoadData {
                 orderLoad(args, args.length-2);
 
         } else {
+
             isDiscountCardPresent = false;
             orderLoad(args, args.length-1);
         }

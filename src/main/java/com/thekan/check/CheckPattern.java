@@ -20,7 +20,7 @@ public class CheckPattern {
     //шаблон переноса строки
     public static String lineBreakCharacter = "\r\n";
     //формат времени и даты
-    public static DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/M/yy");
+    public static DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yy");
     public static DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 

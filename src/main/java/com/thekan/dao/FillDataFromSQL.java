@@ -3,15 +3,39 @@ package com.thekan.dao;
 import com.thekan.entity.DiscountCard;
 import com.thekan.entity.Product;
 
-import java.lang.reflect.InvocationTargetException;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class FillDataFromSQL {
-    private static final String userName = "root";
+
+    private static final String userName;
+    private static final String password;
+    private static final String connectionUrl;
+
+
+
+    static {
+        FileInputStream fis;
+        Properties property = new Properties();
+
+        try {
+            fis = new FileInputStream("src/main/resources/config.properties");
+            property.load(fis);
+
+            userName = property.getProperty("db.login");
+            password = property.getProperty("db.password");
+            connectionUrl = property.getProperty("db.host");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    /*private static final String userName = "root";
     private static final String password = "090690";
-    private static final String connectionUrl = "jdbc:mysql://localhost:3306/test";
+    private static final String connectionUrl = "jdbc:mysql://localhost:3306/chekrun";*/
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
     public static List<Product> fillProductList(List<String[]> order) {
@@ -28,7 +52,7 @@ public class FillDataFromSQL {
             Class.forName(driver).getDeclaredConstructor().newInstance();
             try(Connection connection = DriverManager.getConnection(connectionUrl, userName, password);
                 Statement statement = connection.createStatement()) {
-                ResultSet resultSet =  statement.executeQuery("select * from products where id in " + id.toString());
+                ResultSet resultSet =  statement.executeQuery("select * from products where products_id in " + id.toString());
 
 
                 while(resultSet.next()){
@@ -51,7 +75,7 @@ public class FillDataFromSQL {
             Class.forName(driver).getDeclaredConstructor().newInstance();
             try(Connection connection = DriverManager.getConnection(connectionUrl, userName, password);
                 Statement statement = connection.createStatement()) {
-                ResultSet resultSet =  statement.executeQuery("select procentDiscount from cards where id = " + discountCardNumber);
+                ResultSet resultSet =  statement.executeQuery("select percentageDiscount from discountCards where discountCards_id = " + discountCardNumber);
 
 
                 if(resultSet.next()){

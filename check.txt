@@ -4,8 +4,8 @@
 |            Sovetskaya 163          |
 |          +375 33 222-33-55         |
 |                                    |
-| Cashier: N124aab    DATE : 14/2/23 |
-|                    TIME : 00:34:18 |
+| Cashier: N124aab   DATE : 19/03/23 |
+|                    TIME : 23:13:15 |
 |                                    |
 |------------------------------------|
 | QTY  DESCRIPTION   PRICE     TOTAL |
@@ -20,6 +20,6 @@
 | TAXABLE TOT.               $138.48 |
 | VAT                         $13.85 |
 | TOTAL                      $152.33 |
-| Discount Card: 3  12%              |
-| Discounted Total:          $134.05 |
+| Discount Card: 3  13%              |
+| Discounted Total:          $132.53 |
 |------------------------------------|
